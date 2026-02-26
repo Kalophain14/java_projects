@@ -30,17 +30,5 @@ public class Calculator {
         frame.setResizable(false); //user doesn't drag the sides outside of the window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x button to close the app
         frame.setLayout(new BorderLayout()); //north, south, west and east within the window
-
-        displayLabel.setBackground(customBlack);
-        displayLabel.setForeground(Color.white);
-        displayLabel.setFont(new Font("Arial", Font.PLAIN, 80));
-        displayLabel.setHorizontalAlignment(JLabel.RIGHT); //align the numbers to the right
-        displayLabel.setText(0);
-        displayLabel.setOpaque(true); //make the background color visible
-        
-        //display panel
-        displayPanel.setLayout(new BorderLayout());
-        displayPanel.add(displayLabel);
-        frame.add(displayPanel);
     }
 }
