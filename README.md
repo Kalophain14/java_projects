@@ -1,8 +1,30 @@
-# Java Calculator
+# JavaProjects
 
-A beginner Java learning project — built to practice core Java concepts like classes, loops, conditionals, and event handling using Java Swing. Styled after the Apple iOS calculator.
+A collection of Java projects built while learning Java. Each project is a hands-on way to practise core Java and Swing concepts — starting simple and building up in complexity.
 
-## Features
+## Projects
+
+| Project          | Status         |
+| ---------------- | -------------- |
+| Calculator       | ✅ Complete    |
+| Black Jack       | 🔜 Coming soon |
+| Flappy Bird      | 🔜 Coming soon |
+| Google Chrome    | 🔜 Coming soon |
+| Memory Card Game | 🔜 Coming soon |
+| Minesweeper      | 🔜 Coming soon |
+| Pacman           | 🔜 Coming soon |
+| Snake            | 🔜 Coming soon |
+| Space Invaders   | 🔜 Coming soon |
+| Sudoku           | 🔜 Coming soon |
+| Tic Tac Toe      | 🔜 Coming soon |
+
+---
+
+## Calculator
+
+An Apple iOS styled calculator built with Java Swing.
+
+### Features
 
 - Basic arithmetic: `+`, `-`, `×`, `÷`
 - Percentage and square root (`√`)
@@ -10,7 +32,7 @@ A beginner Java learning project — built to practice core Java concepts like c
 - Keyboard support
 - Apple-inspired dark UI
 
-## Keyboard Shortcuts
+### Keyboard Shortcuts
 
 | Key             | Action            |
 | --------------- | ----------------- |
@@ -22,15 +44,18 @@ A beginner Java learning project — built to practice core Java concepts like c
 | `Backspace`     | Delete last digit |
 | `Escape`        | Clear (AC)        |
 
-## Running the Project
+### Running the Project
 
-1. Open in IntelliJ IDEA
+1. Open `Calculator` folder in IntelliJ IDEA
 2. Run `Main.java`
+
+---
 
 ## Built With
 
 - Java
 - Java Swing
+- IntelliJ IDEA
 
 ## What I Learned
 
