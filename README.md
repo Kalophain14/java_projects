@@ -1,6 +1,6 @@
 # Java Calculator
 
-A Java Swing calculator styled after the Apple iOS calculator.
+A beginner Java learning project — built to practice core Java concepts like classes, loops, conditionals, and event handling using Java Swing. Styled after the Apple iOS calculator.
 
 ## Features
 
@@ -32,4 +32,10 @@ A Java Swing calculator styled after the Apple iOS calculator.
 - Java
 - Java Swing
 
-Coded by @Kalophain
+## What I Learned
+
+- Java classes and constructors
+- Swing UI components (`JFrame`, `JPanel`, `JButton`, `JLabel`)
+- Event handling with `ActionListener` and `KeyAdapter`
+- Loops, conditionals, and arrays
+- Fixing macOS rendering issues with `UIManager`
