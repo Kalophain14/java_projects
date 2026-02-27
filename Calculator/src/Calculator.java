@@ -1,46 +1,85 @@
 import java.awt.*;
-import java.awt.event.*; //graphics library
-import java.util.Arrays; //arrays for listing out buttons
+import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.border.LineBorder; //modify boarders on the buttons
+import javax.swing.border.LineBorder;
 
 public class Calculator {
     
-    // Window Frame
-    int boardWidth =  360;
+    int boardWidth = 360;
     int boardHeight = 540;
 
-    Color customLightGray = new Color(212,212,210);
-    Color customDarkGrey = new Color(80, 80, 80);
+    // Apple iOS calculator colors
+    Color customLightGray = new Color(165, 165, 165);
+    Color customDarkGrey = new Color(51, 51, 51);
     Color customBlack = new Color(28, 28, 28);
-    Color customOrange = new Color(255,149, 0);
+    Color customOrange = new Color(255, 149, 0);
 
-    
-    //Java Swing components
+    String[] buttonValues = {
+        "AC", "+/-", "%", "÷", 
+        "7", "8", "9", "×", 
+        "4", "5", "6", "-",
+        "1", "2", "3", "+",
+        "0", ".", "√", "="
+    };
+    String[] rightSymbols = {"÷", "×", "-", "+", "="};
+    String[] topSymbols = {"AC", "+/-", "%"};
+
     JFrame frame = new JFrame("Calculator");
-    JLabel displayLabel = new JLabel(); //display the numbers on the screen, right aligned
-    JPanel displayPanel = new JPanel(); //display the buttons
+    JLabel displayLabel = new JLabel();
+    JPanel displayPanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
 
+    Calculator() {
 
-    //Construction
-    Calculator (){
-        frame.setVisible(true); //see the window
+        // macOS overrides button colors by default — this forces Java to use its own styling
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         frame.setSize(boardWidth, boardHeight);
-        frame.setLocationRelativeTo(null); //sensor the window
-        frame.setResizable(false); //user doesn't drag the sides outside of the window
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x button to close the app
-        frame.setLayout(new BorderLayout()); //north, south, west and east within the window
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
 
         displayLabel.setBackground(customBlack);
         displayLabel.setForeground(Color.white);
-        displayLabel.setFont(new Font("Arial", Font.PLAIN, 80));
-        displayLabel.setHorizontalAlignment(JLabel.RIGHT); //align the numbers to the right
-        displayLabel.setText("0"); //default value of the display
-        displayLabel.setOpaque(true); //make the background color visible
-        
-        //display panel
+        displayLabel.setFont(new Font("Helvetica Neue", Font.PLAIN, 80));
+        displayLabel.setHorizontalAlignment(JLabel.RIGHT);
+        displayLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10)); //padding so number doesn't sit on the edge
+        displayLabel.setText("0");
+        displayLabel.setOpaque(true); //setOpaque(true) is required otherwise the background color won't show
+
         displayPanel.setLayout(new BorderLayout());
+        displayPanel.setBackground(customBlack);
         displayPanel.add(displayLabel);
         frame.add(displayPanel, BorderLayout.NORTH);
+
+        buttonPanel.setLayout(new GridLayout(5, 4, 1, 1)); //1px gaps between buttons gives the Apple separated look
+        buttonPanel.setBackground(customBlack);
+        for (String value : buttonValues) {
+            JButton button = new JButton(value);
+            button.setFont(new Font("Helvetica Neue", Font.PLAIN, 24));
+            button.setBorder(new LineBorder(customBlack, 2));
+            button.setForeground(Color.white);
+            button.setFocusPainted(false); //removes the default blue focus ring when a button is clicked
+            button.setOpaque(true);        //required on macOS otherwise button background color is ignored
+            button.setContentAreaFilled(true);
+            if (Arrays.asList(rightSymbols).contains(value)) {
+                button.setBackground(customOrange);
+            } else if (Arrays.asList(topSymbols).contains(value)) {
+                button.setBackground(customLightGray);
+                button.setForeground(Color.black);
+            } else {
+                button.setBackground(customDarkGrey);
+            }
+            buttonPanel.add(button);
+        }
+        frame.add(buttonPanel, BorderLayout.CENTER);
+
+        frame.setVisible(true); //setVisible LAST so all components are added before the window appears
     }
 }
