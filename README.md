@@ -31,3 +31,5 @@ A Java Swing calculator styled after the Apple iOS calculator.
 
 - Java
 - Java Swing
+
+Coded by @Kalophain
