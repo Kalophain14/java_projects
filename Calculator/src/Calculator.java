@@ -30,6 +30,10 @@ public class Calculator {
     JPanel displayPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
 
+    double firstNumber = 0;
+    String operator = "";
+    boolean newNumber = true;
+
     Calculator() {
 
         // macOS overrides button colors by default — this forces Java to use its own styling
@@ -51,23 +55,24 @@ public class Calculator {
         displayLabel.setHorizontalAlignment(JLabel.RIGHT);
         displayLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
         displayLabel.setText("0");
-        displayLabel.setOpaque(true); // required otherwise the background color won't show
+        displayLabel.setOpaque(true);
 
         displayPanel.setLayout(new BorderLayout());
         displayPanel.setBackground(customBlack);
         displayPanel.add(displayLabel);
         frame.add(displayPanel, BorderLayout.NORTH);
 
-        buttonPanel.setLayout(new GridLayout(5, 4, 1, 1)); // 1px gaps between buttons gives the Apple separated look
+        buttonPanel.setLayout(new GridLayout(5, 4, 1, 1));
         buttonPanel.setBackground(customBlack);
 
+        // create buttons and add to panel
         for (int i = 0; i < buttonValues.length; i++) {
             JButton button = new JButton();
             String buttonValue = buttonValues[i];
             button.setFont(new Font("Helvetica Neue", Font.PLAIN, 24));
             button.setText(buttonValue);
-            button.setFocusPainted(false); // removes the default blue focus ring when a button is clicked
-            button.setOpaque(true);        // required on macOS otherwise button background color is ignored
+            button.setFocusPainted(false);
+            button.setOpaque(true);
             button.setContentAreaFilled(true);
             button.setBorder(new LineBorder(customBlack, 2));
 
@@ -81,31 +86,10 @@ public class Calculator {
                 button.setBackground(customDarkGrey);
                 button.setForeground(Color.white);
             }
-            
-            // add action listener to handle button clicks
+
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    String buttonValue = button.getText();
-
-                    if (Arrays.asList(rightSymbols).contains(buttonValue)) {
-                        // operator clicked — store the value for later calculation
-
-                    } else if (Arrays.asList(topSymbols).contains(buttonValue)) {
-                        // AC, +/-, % clicked
-
-                    } else { // digits or .
-                        if (buttonValue.equals(".")) {
-                            // only add a decimal if there isn't one already
-
-                        } else if ("0123456789".contains(buttonValue)) {
-                            // if display shows 0, replace it — otherwise append the digit
-                            if (displayLabel.getText().equals("0")) {
-                                displayLabel.setText(buttonValue);
-                            } else {
-                                displayLabel.setText(displayLabel.getText() + buttonValue);
-                            }
-                        }
-                    }
+                    handleInput(button.getText());
                 }
             });
 
@@ -113,6 +97,115 @@ public class Calculator {
         }
 
         frame.add(buttonPanel, BorderLayout.CENTER);
-        frame.setVisible(true); // setVisible LAST so all components are added before the window appears
+
+        // keyboard listener — attached to the frame so it works anywhere in the window
+        frame.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                char key = e.getKeyChar();
+                int keyCode = e.getKeyCode();
+
+                if (Character.isDigit(key)) {
+                    handleInput(String.valueOf(key));
+                } else if (key == '.') {
+                    handleInput(".");
+                } else if (key == '+') {
+                    handleInput("+");
+                } else if (key == '-') {
+                    handleInput("-");
+                } else if (key == '*') {
+                    handleInput("×");
+                } else if (key == '/') {
+                    handleInput("÷");
+                } else if (key == '%') {
+                    handleInput("%");
+                } else if (key == '\n' || key == '=') { // Enter or = key
+                    handleInput("=");
+                } else if (keyCode == KeyEvent.VK_BACK_SPACE) { // delete last digit
+                    String current = displayLabel.getText();
+                    if (current.length() > 1) {
+                        displayLabel.setText(current.substring(0, current.length() - 1));
+                    } else {
+                        displayLabel.setText("0");
+                        newNumber = true;
+                    }
+                } else if (keyCode == KeyEvent.VK_ESCAPE) { // Escape = AC
+                    handleInput("AC");
+                }
+            }
+        });
+
+        // frame must be focusable to receive keyboard events
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
+
+        frame.setVisible(true);
+    }
+
+    // all button and keyboard input goes through here so logic isn't duplicated
+    void handleInput(String value) {
+        if (value.equals("AC")) {
+            displayLabel.setText("0");
+            firstNumber = 0;
+            operator = "";
+            newNumber = true;
+
+        } else if (value.equals("+/-")) {
+            double current = Double.parseDouble(displayLabel.getText());
+            displayLabel.setText(formatResult(current * -1));
+
+        } else if (value.equals("%")) {
+            double current = Double.parseDouble(displayLabel.getText());
+            displayLabel.setText(formatResult(current / 100));
+
+        } else if (Arrays.asList(rightSymbols).contains(value)) {
+            if (value.equals("=")) {
+                double secondNumber = Double.parseDouble(displayLabel.getText());
+                double result = calculate(firstNumber, secondNumber, operator);
+                displayLabel.setText(formatResult(result));
+                operator = "";
+                newNumber = true;
+            } else {
+                firstNumber = Double.parseDouble(displayLabel.getText());
+                operator = value;
+                newNumber = true;
+            }
+
+        } else {
+            if (newNumber) {
+                displayLabel.setText(value.equals(".") ? "0." : value);
+                newNumber = false;
+            } else {
+                if (value.equals(".")) {
+                    if (!displayLabel.getText().contains(".")) {
+                        displayLabel.setText(displayLabel.getText() + ".");
+                    }
+                } else if (value.equals("√")) {
+                    double current = Double.parseDouble(displayLabel.getText());
+                    displayLabel.setText(formatResult(Math.sqrt(current)));
+                    newNumber = true;
+                } else {
+                    displayLabel.setText(displayLabel.getText() + value);
+                }
+            }
+        }
+    }
+
+    double calculate(double a, double b, String operator) {
+        switch (operator) {
+            case "÷": return b != 0 ? a / b : 0; // avoid dividing by zero
+            case "×": return a * b;
+            case "-": return a - b;
+            case "+": return a + b;
+            default:  return b;
+        }
+    }
+
+    // removes unnecessary decimal places e.g. 8.0 becomes 8, but 8.5 stays 8.5
+    String formatResult(double result) {
+        if (result == (long) result) {
+            return String.valueOf((long) result);
+        } else {
+            return String.valueOf(result);
+        }
     }
 }
