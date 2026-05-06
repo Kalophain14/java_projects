@@ -1,7 +1,7 @@
 public class main {
 
     public static void main(String[] args) {
-        BankingApp bankingApp = new BankingApp();
+        bankingApp bankingApp = new bankingApp();
+        bankingApp.run(); //running the app
     }
-
 }
