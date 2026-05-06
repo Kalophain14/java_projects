@@ -1,10 +1,11 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
 out/
+*.class
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
-bankingProgramm.iml
-notes
 
 ### Eclipse ###
 .apt_generated
@@ -30,11 +31,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Project specific ###
+notes
 notes.md
-
-# IntelliJ IDEA
-.idea/
-*.iml
-
-# JUnit
 junit-platform.properties

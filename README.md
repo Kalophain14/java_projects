@@ -1,19 +1,19 @@
 # JavaProjects
 A collection of Java projects built while learning Java. Each project is a hands-on way to practise core Java and Swing concepts — starting simple and building up in complexity.
 ## Projects
-| Project          | Status        |
-|------------------|---------------|
-| Calculator       | ✅ Complete    |
-| BankingApp       | .. In Progress |
-| Flappy Bird      | 🔜 Coming soon |
-| Google Chrome    | 🔜 Coming soon |
-| Memory Card Game | 🔜 Coming soon |
-| Minesweeper      | 🔜 Coming soon |
-| Pacman           | 🔜 Coming soon |
-| Snake            | 🔜 Coming soon |
-| Space Invaders   | 🔜 Coming soon |
-| Sudoku           | 🔜 Coming soon |
-| Tic Tac Toe      | 🔜 Coming soon |
+| Project                | Status         |
+|------------------------|----------------|
+| Calculator             | ✅ Complete     |
+| BankingApp             | ⏳ In Progress  |
+| Flappy Bird            | 🔜 Coming Soon  |
+| Tic Tac Toe            | 🔜 Coming Soon  |
+| Memory Card Game       | 🔜 Coming Soon  |
+| Minesweeper            | 🔜 Coming Soon  |
+| Pacman                 | 🔜 Coming Soon  |
+| Snake                  | 🔜 Coming Soon  |
+| Space Invaders         | 🔜 Coming Soon  |
+| Fraud Rule EService    | 🔜 Coming Soon  |
+| Trans Aggregation API  | 🔜 Coming Soon  |
 ---
 ## Calculator
 An Apple iOS styled calculator built with Java Swing.
