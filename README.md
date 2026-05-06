@@ -1,10 +1,10 @@
 # JavaProjects
 A collection of Java projects built while learning Java. Each project is a hands-on way to practise core Java and Swing concepts — starting simple and building up in complexity.
 ## Projects
-| Project          | Status         |
-| ---------------- | -------------- |
+| Project          | Status        |
+|------------------|---------------|
 | Calculator       | ✅ Complete    |
-| Black Jack       | 🔜 Coming soon |
+| BankingApp       | .. In Progress |
 | Flappy Bird      | 🔜 Coming soon |
 | Google Chrome    | 🔜 Coming soon |
 | Memory Card Game | 🔜 Coming soon |
