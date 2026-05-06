@@ -18,7 +18,7 @@ A collection of Java projects built while learning Java. Each project is a hands
 ## Calculator
 An Apple iOS styled calculator built with Java Swing.
 
-![Calculator Preview](./Calculator/assets/%20calculator-preview.png)
+![Calculator Preview](./01_calculator/assets/%20calculator-preview.png)
 
 ### Features
 - Basic arithmetic: `+`, `-`, `×`, `÷`
