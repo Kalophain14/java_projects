@@ -1,0 +1,109 @@
+i
+// ── Menu options ─────────────────────────────────────────
+
+    private void showBalance() {
+        printHeader("BALANCE");
+        System.out.printf("  💰 Your current balance is: R%.2f%n%n", balance);
+    }
+
+    private void deposit() {
+        printHeader("DEPOSIT");
+        System.out.printf("  Current balance: R%.2f%n", balance);
+
+        double amount = readDouble("  How much would you like to deposit? R");
+
+        if (amount <= 0) {
+            System.out.println("  ⚠️  Deposit amount must be greater than zero.\n");
+            return;
+        }
+
+        balance += amount;
+        System.out.printf("  ✅ Deposited R%.2f  |  New balance: R%.2f%n%n", amount, balance);
+    }
+
+    private void withdraw() {
+        printHeader("WITHDRAW");
+        System.out.printf("  Current balance: R%.2f%n", balance);
+
+        double amount = readDouble("  How much would you like to withdraw? R");
+
+        if (amount <= 0) {
+            System.out.println("  ⚠️  Withdrawal amount must be greater than zero.\n");
+            return;
+        }
+
+        if (amount > balance) {
+            System.out.printf("  ❌ Insufficient funds. You only have R%.2f available.%n%n", balance);
+            return;
+        }
+
+        balance -= amount;
+        System.out.printf("  ✅ Withdrew R%.2f  |  New balance: R%.2f%n%n", amount, balance);
+    }
+
+    // ── Display helpers ──────────────────────────────────────
+
+    private void printWelcome() {
+        System.out.println("╔══════════════════════════════╗");
+        System.out.println("║    Welcome to SA Bank 🏦     ║");
+        System.out.println("╚══════════════════════════════╝");
+        System.out.println();
+    }
+
+    private void printMenu() {
+        System.out.println("┌──────────────────────────────┐");
+        System.out.println("│         MAIN MENU            │");
+        System.out.println("├──────────────────────────────┤");
+        System.out.println("│  1.  Show Balance            │");
+        System.out.println("│  2.  Deposit                 │");
+        System.out.println("│  3.  Withdraw                │");
+        System.out.println("│  4.  Exit                    │");
+        System.out.println("└──────────────────────────────┘");
+    }
+
+    private void printHeader(String title) {
+        System.out.println("\n── " + title + " " + "─".repeat(Math.max(0, 26 - title.length())));
+    }
+
+    private void printGoodbye() {
+        System.out.println("\n╔══════════════════════════════╗");
+        System.out.println("║  Thanks for banking with us! ║");
+        System.out.println("║         Goodbye! 👋          ║");
+        System.out.println("╚══════════════════════════════╝");
+    }
+
+    // ── Input helpers ────────────────────────────────────────
+
+    /**
+     * Keeps asking until the user enters a valid whole number.
+     */
+    private int readInt(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            if (scanner.hasNextInt()) {
+                int value = scanner.nextInt();
+                scanner.nextLine(); // clear the leftover newline
+                return value;
+            } else {
+                System.out.println("  ⚠️  That's not a valid number. Try again.");
+                scanner.nextLine(); // discard bad input
+            }
+        }
+    }
+
+    /**
+     * Keeps asking until the user enters a valid decimal number.
+     */
+    private double readDouble(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            if (scanner.hasNextDouble()) {
+                double value = scanner.nextDouble();
+                scanner.nextLine();
+                return value;
+            } else {
+                System.out.println("  ⚠️  Please enter a valid amount (e.g. 150 or 99.99).");
+                scanner.nextLine();
+            }
+        }
+    }
