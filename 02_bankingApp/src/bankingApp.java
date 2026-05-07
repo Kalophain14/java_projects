@@ -14,7 +14,7 @@ public class bankingApp {
     public void run() {
         printWelcome();
 
-        boolean isRunning = true;
+        boolean isRunning = true; // To always ask the user option
 
         while (isRunning) {
             printMenu();
@@ -31,7 +31,6 @@ public class bankingApp {
                 default -> System.out.println("⚠️  Please enter a number between 1 and 4.\n");
             }
         }
-
         scanner.close();
     }
 
@@ -89,6 +88,5 @@ public class bankingApp {
         System.out.println("║         Goodbye! 👋          ║");
         System.out.println("╚══════════════════════════════╝");
     }
-
 
 }
