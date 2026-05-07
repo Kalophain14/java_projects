@@ -18,7 +18,6 @@ A beginner Java learning project — built to practice core Java concepts like c
 ## Built With
 
 - Java
-- Java Swing
 
 ## What I Learned
 
