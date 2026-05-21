@@ -56,6 +56,49 @@ public class bankingApp {
         System.out.printf("  ✅ Deposited R%.2f  |  New balance: R%.2f%n%n", amount, balance);
     }
 
+    private void withdraw() {
+        printHeader("WITHDRAW");
+        System.out.printf("  Current balance: R%.2f%n", balance);
+
+        double amount = readDouble("  How much would you like to withdraw? R");
+
+        if (amount <= 0) {
+            System.out.println("  ⚠️  Withdrawal amount must be greater than zero.\n");
+            return; //stops
+        }
+
+        if (amount > balance) {
+            System.out.printf("  ❌ Insufficient funds. You only have R%.2f available.%n%n", balance);
+            return; //stops
+        }
+
+        balance -= amount;
+        System.out.printf("  ✅ Withdrew R%.2f  |  New balance: R%.2f%n%n", amount, balance);
+    }
+
+    // ── Input helpers ────────────────────────────────────────
+
+    private int readInt(String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextInt()) {
+            System.out.print("  ⚠️  Invalid input. Enter a number: ");
+            scanner.next(); // discard bad input
+        }
+        int value = scanner.nextInt();
+        scanner.nextLine(); // clear leftover newline
+        return value;
+    }
+
+    private double readDouble(String prompt) {
+        System.out.print(prompt);
+        while (!scanner.hasNextDouble()) {
+            System.out.print("  ⚠️  Invalid input. Enter a number: ");
+            scanner.next(); // discard bad input
+        }
+        double value = scanner.nextDouble();
+        scanner.nextLine(); // clear leftover newline
+        return value;
+    }
 
     // ── Display helpers ──────────────────────────────────────
     // This shows the user the options they have to chose
