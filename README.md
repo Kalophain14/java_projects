@@ -4,7 +4,7 @@ A collection of Java projects built while learning Java. Each project is a hands
 | Project                | Status         |
 |------------------------|----------------|
 | Calculator             | ✅ Complete     |
-| BankingApp             | ⏳ In Progress  |
+| BankingApp             | ✅ Complete     |
 | Flappy Bird            | 🔜 Coming Soon  |
 | Tic Tac Toe            | 🔜 Coming Soon  |
 | Memory Card Game       | 🔜 Coming Soon  |
