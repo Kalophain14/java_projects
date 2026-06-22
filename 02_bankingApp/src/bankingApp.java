@@ -28,7 +28,7 @@ public class bankingApp {
                     printGoodbye();
                     isRunning = false;
                 }
-                default -> System.out.println("⚠️  Please enter a number between 1 and 4.\n");
+                default -> System.out.println("  Please enter a number between 1 and 4.\n");
             }
         }
         scanner.close();
@@ -38,7 +38,7 @@ public class bankingApp {
 
     private void showBalance() {
         printHeader("BALANCE");
-        System.out.printf("  💰 Your current balance is: R%.2f%n%n", balance);
+        System.out.printf("  Your current balance is: R%.2f%n%n", balance);
     }
 
     private void deposit() {
@@ -48,12 +48,12 @@ public class bankingApp {
         double amount = readDouble("  How much would you like to deposit? R");
 
         if (amount <= 0) {
-            System.out.println("  ⚠️  Deposit amount must be greater than zero.\n");
+            System.out.println("  Deposit amount must be greater than zero.\n");
             return; //stops
         }
 
         balance += amount;
-        System.out.printf("  ✅ Deposited R%.2f  |  New balance: R%.2f%n%n", amount, balance);
+        System.out.printf("  Deposited R%.2f  |  New balance: R%.2f%n%n", amount, balance);
     }
 
     private void withdraw() {
@@ -63,17 +63,17 @@ public class bankingApp {
         double amount = readDouble("  How much would you like to withdraw? R");
 
         if (amount <= 0) {
-            System.out.println("  ⚠️  Withdrawal amount must be greater than zero.\n");
+            System.out.println("  Withdrawal amount must be greater than zero.\n");
             return; //stops
         }
 
         if (amount > balance) {
-            System.out.printf("  ❌ Insufficient funds. You only have R%.2f available.%n%n", balance);
+            System.out.printf("  Insufficient funds. You only have R%.2f available.%n%n", balance);
             return; //stops
         }
 
         balance -= amount;
-        System.out.printf("  ✅ Withdrew R%.2f  |  New balance: R%.2f%n%n", amount, balance);
+        System.out.printf("  Withdrew R%.2f  |  New balance: R%.2f%n%n", amount, balance);
     }
 
     // ── Input helpers ────────────────────────────────────────
@@ -81,7 +81,7 @@ public class bankingApp {
     private int readInt(String prompt) {
         System.out.print(prompt);
         while (!scanner.hasNextInt()) {
-            System.out.print("  ⚠️  Invalid input. Enter a number: ");
+            System.out.print("  Invalid input. Enter a number: ");
             scanner.next(); // discard bad input
         }
         int value = scanner.nextInt();
@@ -92,7 +92,7 @@ public class bankingApp {
     private double readDouble(String prompt) {
         System.out.print(prompt);
         while (!scanner.hasNextDouble()) {
-            System.out.print("  ⚠️  Invalid input. Enter a number: ");
+            System.out.print("  Invalid input. Enter a number: ");
             scanner.next(); // discard bad input
         }
         double value = scanner.nextDouble();
@@ -105,7 +105,7 @@ public class bankingApp {
 
     private void printWelcome() {
         System.out.println("╔══════════════════════════════╗");
-        System.out.println("║    Welcome to SA Bank 🏦     ║");
+        System.out.println("║    Welcome to SA Bank        ║");
         System.out.println("╚══════════════════════════════╝");
         System.out.println();
     }
@@ -128,7 +128,7 @@ public class bankingApp {
     private void printGoodbye() {
         System.out.println("\n╔══════════════════════════════╗");
         System.out.println("║  Thanks for banking with us! ║");
-        System.out.println("║         Goodbye! 👋          ║");
+        System.out.println("║         Goodbye!             ║");
         System.out.println("╚══════════════════════════════╝");
     }
 
