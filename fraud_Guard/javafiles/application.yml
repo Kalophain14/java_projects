@@ -1,0 +1,118 @@
+spring:
+  application:
+    name: fraudguard-backend
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/fraudguard_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: fraudguard_app
+    password: apppassword123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          fetch_size: 50
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    show-sql: false
+  
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+  
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+logging:
+  level:
+    root: INFO
+    com.fraudguard: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/fraudguard.log
+    max-size: 10MB
+    max-history: 10
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET:your-super-secret-jwt-key-change-in-production-min-32-chars}
+  expiration:
+    ms: 900000  # 15 minutes
+  refresh-expiration:
+    ms: 604800000  # 7 days
+
+# Africa's Talking Configuration
+africas-talking:
+  api-key: ${AFRICAS_TALKING_API_KEY:}
+  api-username: ${AFRICAS_TALKING_USERNAME:fraudguard_sandbox}
+  environment: sandbox  # sandbox or production
+
+# Application Configuration
+app:
+  name: FraudGuard Academy
+  version: 1.0.0
+  environment: ${APP_ENVIRONMENT:development}
+  payout:
+    min-amount: 0.10
+    max-amount: 50.00
+    max-per-day: 50.00
+    retry-count: 3
+  
+# Swagger/OpenAPI Configuration
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: true
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      simple:
+        enabled: true

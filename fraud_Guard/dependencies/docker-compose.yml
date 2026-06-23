@@ -1,0 +1,183 @@
+version: '3.9'
+
+services:
+  # MySQL Database Container
+  mysql:
+    image: mysql:8.0.35
+    container_name: fraudguard-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword123}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-fraudguard_db}
+      MYSQL_USER: ${MYSQL_USER:-fraudguard_app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-apppassword123}
+      MYSQL_INITDB_SKIP_TZINFO: 1
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      # Mount database volume for persistence
+      - fraudguard_mysql_data:/var/lib/mysql
+      # Mount custom MySQL configuration
+      - ./mysql-config.cnf:/etc/mysql/conf.d/custom.cnf:ro
+    networks:
+      - fraudguard-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER:-fraudguard_app}", "-p${MYSQL_PASSWORD:-apppassword123}"]
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+      interval: 10s
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+
+  # Redis Cache (for session/wallet locking)
+  redis:
+    image: redis:7.2-alpine
+    container_name: fraudguard-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - fraudguard_redis_data:/data
+    networks:
+      - fraudguard-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  # Spring Boot Backend Service
+  backend:
+    build:
+      context: ./fraudguard-backend
+      dockerfile: Dockerfile
+    container_name: fraudguard-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # Spring Boot Profile
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILE:-dev}
+      
+      # Database Configuration
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-fraudguard_db}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-fraudguard_app}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-apppassword123}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: false
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      
+      # Redis Configuration
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      
+      # JWT Configuration
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-in-production-min-32-chars}
+      JWT_EXPIRATION_MS: 900000  # 15 minutes
+      JWT_REFRESH_EXPIRATION_MS: 604800000  # 7 days
+      
+      # API Configuration
+      SERVER_PORT: 8080
+      SERVER_SERVLET_CONTEXT_PATH: /
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,metrics,info,prometheus
+      
+      # Africa's Talking Configuration
+      AFRICAS_TALKING_API_KEY: ${AFRICAS_TALKING_API_KEY:-}
+      AFRICAS_TALKING_USERNAME: ${AFRICAS_TALKING_USERNAME:-fraudguard_sandbox}
+      
+      # Application Configuration
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
+      APP_NAME: FraudGuard Academy
+      
+      # Logging
+      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_LEVEL_COM_FRAUDGUARD: DEBUG
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    volumes:
+      # Mount application logs
+      - ./logs:/app/logs
+      # Mount configuration files
+      - ./fraudguard-backend/src/main/resources/application-${SPRING_PROFILE:-dev}.yml:/app/config/application.yml:ro
+    networks:
+      - fraudguard-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+      interval: 15s
+    restart: unless-stopped
+
+  # PgAdmin (Optional - for MySQL administration via web UI)
+  # Uncomment if you want a database GUI
+  # phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   container_name: fraudguard-phpmyadmin
+  #   depends_on:
+  #     - mysql
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_USER: ${MYSQL_USER:-fraudguard_app}
+  #     PMA_PASSWORD: ${MYSQL_PASSWORD:-apppassword123}
+  #     PMA_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword123}
+  #   ports:
+  #     - "8081:80"
+  #   networks:
+  #     - fraudguard-network
+  #   restart: unless-stopped
+
+  # Adminer (Lightweight alternative to PhpMyAdmin)
+  # Uncomment if you want a lightweight database GUI
+  # adminer:
+  #   image: adminer:latest
+  #   container_name: fraudguard-adminer
+  #   depends_on:
+  #     - mysql
+  #   ports:
+  #     - "8081:8080"
+  #   networks:
+  #     - fraudguard-network
+  #   restart: unless-stopped
+
+networks:
+  fraudguard-network:
+    driver: bridge
+
+volumes:
+  fraudguard_mysql_data:
+    driver: local
+  fraudguard_redis_data:
+    driver: local
+
+# ============================================================================
+# USAGE
+# ============================================================================
+# 
+# Start all services:
+#   docker-compose up -d
+#
+# View logs:
+#   docker-compose logs -f backend
+#   docker-compose logs -f mysql
+#
+# Stop services:
+#   docker-compose down
+#
+# Stop and remove volumes (clean slate):
+#   docker-compose down -v
+#
+# Rebuild containers:
+#   docker-compose build --no-cache
+#
+# Execute MySQL commands:
+#   docker exec fraudguard-mysql mysql -u root -prootpassword123 fraudguard_db
+#
+# Access API:
+#   http://localhost:8080/api/v1/health
+#   http://localhost:8080/swagger-ui.html
+#   http://localhost:8080/api/v1/actuator/health (detailed health)
+#
+# ============================================================================
