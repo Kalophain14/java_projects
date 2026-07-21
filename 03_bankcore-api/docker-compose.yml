@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: bankcore-postgres
+    environment:
+      POSTGRES_DB: bankcore
+      POSTGRES_USER: bankcore
+      POSTGRES_PASSWORD: bankcore123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bankcore -d bankcore"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: bankcore-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/bankcore
+      SPRING_DATASOURCE_USERNAME: bankcore
+      SPRING_DATASOURCE_PASSWORD: bankcore123
+      JWT_SECRET: ${JWT_SECRET:-bankcore-super-secret-key-that-needs-to-be-at-least-256-bits-long-for-hs256-algorithm}
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
