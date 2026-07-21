@@ -1,3 +1,8 @@
 package com.bankcore.api.model.enums;
 
-// TODO: Implement this class
+public enum Role {
+    ROLE_ADMIN,
+    ROLE_MANAGER,
+    ROLE_TELLER,
+    ROLE_CUSTOMER
+}

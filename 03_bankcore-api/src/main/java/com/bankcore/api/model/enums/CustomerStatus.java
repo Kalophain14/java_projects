@@ -1,3 +1,8 @@
 package com.bankcore.api.model.enums;
 
-// TODO: Implement this class
+public enum CustomerStatus {
+    ACTIVE,
+    INACTIVE,
+    SUSPENDED,
+    CLOSED
+}
