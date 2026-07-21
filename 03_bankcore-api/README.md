@@ -185,10 +185,3 @@ docker-compose up -d
 | teller | teller123 | TELLER |
 
 ---
-
-## 📝 Notes
-
-- Each empty file has a `// TODO: Implement this class` comment
-- Start from the top of the roadmap and work down
-- Don't skip phases — each layer depends on the one below it
-- Ask questions! Every line of code will be explained.
