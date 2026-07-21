@@ -1,6 +1,6 @@
 # BankCore API - Learning Project
 
-A banking backend simulation built using Java Spring Boot. This is a **learning project** — every file you write teaches you something new about Java, Spring Boot, and backend development.
+A banking backend simulation built using Java Spring Boot.
 
 ## How This Project Works
 
@@ -12,112 +12,112 @@ A banking backend simulation built using Java Spring Boot. This is a **learning 
 
 ```
 bankcore-api/
-├── ✅ pom.xml                          # Maven build config (provided)
-├── ✅ Dockerfile                       # Docker build (provided)
-├── ✅ docker-compose.yml              # Docker orchestration (provided)
-├── ✅ .gitignore                      # Git ignore rules (provided)
+├── pom.xml                          # Maven build config (provided)
+├── Dockerfile                       # Docker build (provided)
+├── docker-compose.yml              # Docker orchestration (provided)
+├── .gitignore                      # Git ignore rules (provided)
 │
-├── ✅ src/main/resources/
-│   ├── ✅ application.properties      # App config (provided)
-│   └── ✅ db/migration/
-│       ├── ✅ V1__init_schema.sql     # Database schema (provided)
-│       └── ✅ V2__seed_data.sql       # Seed data (provided)
+├── src/main/resources/
+│   ├── application.properties      # App config (provided)
+│   └── db/migration/
+│       ├── V1__init_schema.sql     # Database schema (provided)
+│       └── V2__seed_data.sql       # Seed data (provided)
 │
-├── ✅ src/test/resources/
-│   └── ✅ application-test.properties # Test config (provided)
+├── src/test/resources/
+│   └── application-test.properties # Test config (provided)
 │
-└── ❌ src/main/java/com/bankcore/api/
-    ├── ❌ BankCoreApiApplication.java          # Main entry point
+└── src/main/java/com/bankcore/api/
+    ├── BankCoreApiApplication.java          # Main entry point
     │
-    ├── ❌ model/
-    │   ├── ❌ enums/
-    │   │   ├── ❌ AccountType.java
-    │   │   ├── ❌ AccountStatus.java
-    │   │   ├── ❌ TransactionType.java
-    │   │   ├── ❌ TransactionStatus.java
-    │   │   ├── ❌ CustomerStatus.java
-    │   │   └── ❌ Role.java
-    │   ├── ❌ Customer.java
-    │   ├── ❌ Account.java
-    │   ├── ❌ Transaction.java
-    │   ├── ❌ User.java
-    │   └── ❌ AuditLog.java
+    ├── model/
+    │   ├── enums/
+    │   │   ├── AccountType.java
+    │   │   ├── AccountStatus.java
+    │   │   ├── TransactionType.java
+    │   │   ├── TransactionStatus.java
+    │   │   ├── CustomerStatus.java
+    │   │   └── Role.java
+    │   ├── Customer.java
+    │   ├── Account.java
+    │   ├── Transaction.java
+    │   ├── User.java
+    │   └── AuditLog.java
     │
-    ├── ❌ dto/
-    │   ├── ❌ CustomerDTO.java
-    │   ├── ❌ CreateCustomerRequest.java
-    │   ├── ❌ UpdateCustomerRequest.java
-    │   ├── ❌ AccountDTO.java
-    │   ├── ❌ CreateAccountRequest.java
-    │   ├── ❌ TransactionDTO.java
-    │   ├── ❌ DepositRequest.java
-    │   ├── ❌ WithdrawalRequest.java
-    │   ├── ❌ TransferRequest.java
-    │   ├── ❌ LoginRequest.java
-    │   ├── ❌ AuthResponse.java
-    │   ├── ❌ RegisterRequest.java
-    │   ├── ❌ ApiResponse.java
-    │   ├── ❌ PageResponse.java
-    │   ├── ❌ AccountBalanceDTO.java
-    │   ├── ❌ TransactionHistoryRequest.java
-    │   └── ❌ AuditLogDTO.java
+    ├── dto/
+    │   ├── CustomerDTO.java
+    │   ├── CreateCustomerRequest.java
+    │   ├── UpdateCustomerRequest.java
+    │   ├── AccountDTO.java
+    │   ├── CreateAccountRequest.java
+    │   ├── TransactionDTO.java
+    │   ├── DepositRequest.java
+    │   ├── WithdrawalRequest.java
+    │   ├── TransferRequest.java
+    │   ├── LoginRequest.java
+    │   ├── AuthResponse.java
+    │   ├── RegisterRequest.java
+    │   ├── ApiResponse.java
+    │   ├── PageResponse.java
+    │   ├── AccountBalanceDTO.java
+    │   ├── TransactionHistoryRequest.java
+    │   └── AuditLogDTO.java
     │
-    ├── ❌ exception/
-    │   ├── ❌ ResourceNotFoundException.java
-    │   ├── ❌ DuplicateResourceException.java
-    │   ├── ❌ InsufficientFundsException.java
-    │   ├── ❌ AccountClosedException.java
-    │   ├── ❌ InvalidTransactionException.java
-    │   ├── ❌ UnauthorizedAccessException.java
-    │   └── ❌ GlobalExceptionHandler.java
+    ├── exception/
+    │   ├── ResourceNotFoundException.java
+    │   ├── DuplicateResourceException.java
+    │   ├── InsufficientFundsException.java
+    │   ├── AccountClosedException.java
+    │   ├── InvalidTransactionException.java
+    │   ├── UnauthorizedAccessException.java
+    │   └── GlobalExceptionHandler.java
     │
-    ├── ❌ repository/
-    │   ├── ❌ CustomerRepository.java
-    │   ├── ❌ AccountRepository.java
-    │   ├── ❌ TransactionRepository.java
-    │   ├── ❌ UserRepository.java
-    │   └── ❌ AuditLogRepository.java
+    ├── repository/
+    │   ├── CustomerRepository.java
+    │   ├── AccountRepository.java
+    │   ├── TransactionRepository.java
+    │   ├── UserRepository.java
+    │   └── AuditLogRepository.java
     │
-    ├── ❌ mapper/
-    │   ├── ❌ CustomerMapper.java
-    │   ├── ❌ AccountMapper.java
-    │   ├── ❌ TransactionMapper.java
-    │   └── ❌ AuditLogMapper.java
+    ├── mapper/
+    │   ├── CustomerMapper.java
+    │   ├── AccountMapper.java
+    │   ├── TransactionMapper.java
+    │   └── AuditLogMapper.java
     │
-    ├── ❌ service/
-    │   ├── ❌ CustomerService.java
-    │   ├── ❌ AccountService.java
-    │   ├── ❌ TransactionService.java
-    │   ├── ❌ AuthService.java
-    │   └── ❌ AuditLogService.java
+    ├── service/
+    │   ├── CustomerService.java
+    │   ├── AccountService.java
+    │   ├── TransactionService.java
+    │   ├── AuthService.java
+    │   └── AuditLogService.java
     │
-    ├── ❌ controller/
-    │   ├── ❌ AuthController.java
-    │   ├── ❌ CustomerController.java
-    │   ├── ❌ AccountController.java
-    │   ├── ❌ TransactionController.java
-    │   ├── ❌ AuditLogController.java
-    │   └── ❌ AdminController.java
+    ├── controller/
+    │   ├── AuthController.java
+    │   ├── CustomerController.java
+    │   ├── AccountController.java
+    │   ├── TransactionController.java
+    │   ├── AuditLogController.java
+    │   └── AdminController.java
     │
-    ├── ❌ security/
-    │   ├── ❌ JwtTokenProvider.java
-    │   ├── ❌ JwtAuthenticationFilter.java
-    │   ├── ❌ SecurityConfig.java
-    │   └── ❌ CustomUserDetailsService.java
+    ├── security/
+    │   ├── JwtTokenProvider.java
+    │   ├── JwtAuthenticationFilter.java
+    │   ├── SecurityConfig.java
+    │   └── CustomUserDetailsService.java
     │
-    ├── ❌ config/
-    │   ├── ❌ OpenApiConfig.java
-    │   ├── ❌ JacksonConfig.java
-    │   └── ❌ WebConfig.java
+    ├── config/
+    │   ├── OpenApiConfig.java
+    │   ├── JacksonConfig.java
+    │   └── WebConfig.java
     │
-    └── ❌ audit/
-        └── ❌ AuditService.java
+    └── audit/
+        └── AuditService.java
 
-└── ❌ src/test/java/com/bankcore/api/
-    ├── ❌ BankCoreApiApplicationTests.java
-    ├── ❌ CustomerServiceTest.java
-    ├── ❌ AccountServiceTest.java
-    └── ❌ TransactionServiceTest.java
+└── src/test/java/com/bankcore/api/
+    ├── BankCoreApiApplicationTests.java
+    ├── CustomerServiceTest.java
+    ├── AccountServiceTest.java
+    └── TransactionServiceTest.java
 ```
 
 ---
