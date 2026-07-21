@@ -1,52 +1,83 @@
 # JavaProjects
-A collection of Java projects built while learning Java. Each project is a hands-on way to practise core Java and Swing concepts — starting simple and building up in complexity.
+
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Backend-green)
+![Status](https://img.shields.io/badge/Status-In%20Progress-blue)
+
+A collection of Java projects built to learn the tech stack listed below — starting simple and building toward production-style backend systems. Each project introduces new pieces of the stack, building on what the last one covered.
+
 ## Projects
-| Project                | Status         |
-|------------------------|----------------|
-| Calculator             | ✅ Complete     |
-| BankingApp             | ✅ Complete     |
-| Flappy Bird            | 🔜 Coming Soon  |
-| Tic Tac Toe            | 🔜 Coming Soon  |
-| Memory Card Game       | 🔜 Coming Soon  |
-| Minesweeper            | 🔜 Coming Soon  |
-| Pacman                 | 🔜 Coming Soon  |
-| Snake                  | 🔜 Coming Soon  |
-| Space Invaders         | 🔜 Coming Soon  |
-| Fraud Rule EService    | 🔜 Coming Soon  |
-| Trans Aggregation API  | 🔜 Coming Soon  |
----
-## Calculator
-An Apple iOS styled calculator built with Java Swing.
 
-![Calculator Preview](./01_calculator/assets/%20calculator-preview.png)
+| Project | Description | Status |
+|---------|--------------|--------|
+| [Calculator Preview](./01_calculator/assets/%20calculator-preview.png) Apple iOS styled calculator built with Java Swing. | ✅ Complete |
+| [BankingApp (CLI)](./02_bankingapp) | Command-line banking application simulating core operations like accounts, deposits, and transfers. | ✅ Complete |
+| [BankCore API](./03_bankcore-api) | Spring Boot REST API for core banking operations, backed by PostgreSQL. | 🔜 Coming Soon |
+| [Fraud Behavior Engine](./04_fraud-behavior-engine) | Event-driven service for detecting fraudulent transaction patterns using Kafka. | 🔜 Coming Soon |
 
-### Features
-- Basic arithmetic: `+`, `-`, `×`, `÷`
-- Percentage and square root (`√`)
-- Sign toggle (`+/-`)
-- Keyboard support
-- Apple-inspired dark UI
-### Keyboard Shortcuts
-| Key             | Action            |
-| --------------- | ----------------- |
-| `0-9`           | Number input      |
-| `+` `-` `*` `/` | Operators         |
-| `=` or `Enter`  | Calculate         |
-| `.`             | Decimal           |
-| `%`             | Percentage        |
-| `Backspace`     | Delete last digit |
-| `Escape`        | Clear (AC)        |
-### Running the Project
-1. Open `Calculator` folder in IntelliJ IDEA
-2. Run `Main.java`
 ---
-## Built With
-- Java
-- Java Swing
-- IntelliJ IDEA
-## What I Learned
-- Java classes and constructors
-- Swing UI components (`JFrame`, `JPanel`, `JButton`, `JLabel`)
-- Event handling with `ActionListener` and `KeyAdapter`
-- Loops, conditionals, and arrays
-- Fixing macOS rendering issues with `UIManager`
+
+## Tech Stack
+
+### Core
+- Java 21
+- Spring Boot (JPA, Security)
+- PostgreSQL
+- Apache Kafka
+- Redis
+- Hibernate
+
+### Testing
+- JUnit 5
+- Mockito
+
+### Documentation
+- Swagger / OpenAPI
+
+### DevOps
+- Docker
+- AWS
+
+---
+
+## What I'm Learning
+
+- Building RESTful APIs with Spring Boot
+- Data persistence and ORM with JPA/Hibernate
+- Securing APIs with Spring Security
+- Event-driven architecture with Kafka
+- Caching strategies with Redis
+- Writing unit and integration tests with JUnit 5 and Mockito
+- API documentation with Swagger/OpenAPI
+- Containerization with Docker and deployment on AWS
+
+---
+
+## Repo Structure
+
+```
+JavaProjects/
+├── 01_calculator/
+├── 02_bankingapp/
+├── 03_bankcore-api/
+├── 04_fraud-behavior-engine/
+└── README.md
+```
+
+---
+
+## How to Run
+
+1. Clone the repository
+   ```
+   git clone https://github.com/<your-username>/JavaProjects.git
+   ```
+2. Open the desired project folder in IntelliJ IDEA (or your preferred IDE)
+3. Ensure Java 21 is installed and set as the project SDK
+4. Run the project's `Main.java` (or, for Spring Boot projects, the `*Application.java` entry point)
+
+---
+
+## License
+
+This repository is for personal learning purposes. Feel free to explore or reference the code.
