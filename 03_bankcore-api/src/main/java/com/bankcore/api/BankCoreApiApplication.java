@@ -12,4 +12,3 @@ public class BankCoreApiApplication {
         SpringApplication.run(BankCoreApiApplication.class, args);
     }
 }
-
