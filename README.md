@@ -10,7 +10,7 @@ A collection of Java projects built to learn the tech stack listed below — sta
 
 | Project | Description | Status |
 |---------|--------------|--------|
-| [Calculator Preview](./01_calculator/assets/%20calculator-preview.png) Apple iOS styled calculator built with Java Swing. | ✅ Complete |
+| [Calculator Preview](./01_calculator/assets/%20calculator-preview.png) | Apple iOS styled calculator built with Java Swing. | ✅ Complete |
 | [BankingApp (CLI)](./02_bankingapp) | Command-line banking application simulating core operations like accounts, deposits, and transfers. | ✅ Complete |
 | [BankCore API](./03_bankcore-api) | Spring Boot REST API for core banking operations, backed by PostgreSQL. | 🔜 Coming Soon |
 | [Fraud Behavior Engine](./04_fraud-behavior-engine) | Event-driven service for detecting fraudulent transaction patterns using Kafka. | 🔜 Coming Soon |
