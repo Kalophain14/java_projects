@@ -83,8 +83,15 @@ public class Customer {
     @Builder.Default // Use builder as default
     private CustomerStatus status = CustomerStatus.ACTIVE;
 
-    // Relationships
-    // @OneToMany = One Customer has Many Accounts."
+    /*
+    Relationships customers mapping
+
+    @OneToMany = One Customer has Many Accounts."
+    Class customer owns the relationship
+    CascadeType = delete all customers if i delete
+    fetch = FetchType.LAZY = Don't load accounts until someone asks for them or
+                           = Load all the basic information first fetch other data when requested
+     */
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Account> accounts = new ArrayList<>();
@@ -92,6 +99,12 @@ public class Customer {
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User user;
 
+
+    /*
+    Audit Fields
+
+
+     */
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
