@@ -1,0 +1,18 @@
+{
+  "_comment": "Schema stub — defines what counts as a misdirected document job on a card printer queue.",
+  "mode": "log_only",
+  "queues": {
+    "dcp_target_names": ["REPLACE_ME_DCP_QUEUE_NAME"],
+    "fallback_a4_queue": "REPLACE_ME_A4_QUEUE_NAME"
+  },
+  "rules": {
+    "max_allowed_pages": 1,
+    "allowed_media_sizes": ["CR-80", "ID-1"],
+    "blocked_media_sizes": ["A4", "Letter", "Legal"]
+  },
+  "actions": {
+    "cancel_job": true,
+    "auto_route_to_fallback": false,
+    "desktop_notification": true
+  }
+}
