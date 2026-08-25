@@ -12,10 +12,10 @@ A banking backend simulation built using Java Spring Boot.
 
 ```
 bankcore-api/
-├── pom.xml                          # Maven build config (provided)
-├── Dockerfile                       # Docker build (provided)
-├── docker-compose.yml              # Docker orchestration (provided)
-├── .gitignore                      # Git ignore rules (provided)
+├── pom.xml                          # Maven build config
+├── Dockerfile                       # Docker build
+├── docker-compose.yml              # Docker orchestration
+├── .gitignore                      # Git ignore rules
 │
 ├── src/main/resources/
 │   ├── application.properties      # App config (provided)
