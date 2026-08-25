@@ -15,20 +15,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "customers")
-@EntityListeners(AuditingEntityListener.class)
+@Entity // Java Persistance API Annotations (Database Mapping) This class should become a database table
+@Table(name = "customers") // Naming conversation to handle database Hibernate
+@EntityListeners(AuditingEntityListener.class) // Fill createdAt and updatedAt automatically
+
+// Lombok Annotations (Auto Generated Code) POXML
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor // public customer (){} Empty constructor
+@AllArgsConstructor // public Customer(String id, String firstName) Constructors with all fields
+@Builder // Customer.builder().firstName("John").build() Fluent builder pattern
+
 public class Customer {
 
+    // ID FIELD
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID) // generates unique identifiers
     private String id;
 
+    /*
+     Validation Annotations
+
+     @NotBlank = Application-level validation — checks BEFORE sending to database (gives nice error messages)
+     @Column(nullable = false) = Database-level constraint — the database itself refuses NULL values (last line of defense)
+    */
     @NotBlank
     @Size(max = 100)
     @Column(nullable = false)
@@ -67,11 +77,14 @@ public class Customer {
     @Size(max = 100)
     private String country;
 
-    @Enumerated(EnumType.STRING)
+    // The Enum Field
+    @Enumerated(EnumType.STRING) // Store the enum as TEXT in the database (not numbers)
     @Column(nullable = false)
-    @Builder.Default
+    @Builder.Default // Use builder as default
     private CustomerStatus status = CustomerStatus.ACTIVE;
 
+    // Relationships
+    // @OneToMany = One Customer has Many Accounts."
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Account> accounts = new ArrayList<>();
