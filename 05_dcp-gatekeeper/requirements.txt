@@ -1,3 +1,0 @@
-# Core dependencies for dcp-gatekeeper
-pycups
-dbus-python

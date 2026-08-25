@@ -1,1 +1,0 @@
-"""dcp-gatekeeper source package."""
