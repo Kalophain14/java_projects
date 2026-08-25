@@ -10,6 +10,7 @@ that can be read by the Bank core API
 - You can only pick a valid option, otherwise won't run
 - When ENUM is called Java will creates CLASS with an OBJECT for each item on the list
  */
+
 public enum AccountType {
     SAVINGS,
     CHEQUE,
