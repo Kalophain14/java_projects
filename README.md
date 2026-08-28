@@ -17,29 +17,6 @@ A collection of Java projects built to learn the tech stack listed below — sta
 
 ---
 
-## Tech Stack
-
-### Core
-- Java 21
-- Spring Boot (JPA, Security)
-- PostgreSQL
-- Apache Kafka
-- Redis
-- Hibernate
-
-### Testing
-- JUnit 5
-- Mockito
-
-### Documentation
-- Swagger / OpenAPI
-
-### DevOps
-- Docker
-- AWS
-
----
-
 ## What I'm Learning
 
 - Building RESTful APIs with Spring Boot
